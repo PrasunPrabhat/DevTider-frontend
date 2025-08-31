@@ -91,24 +91,7 @@ const Premium = () => {
                 📜 Subscription Details
               </h2>
               <p>
-                <span className="font-semibold">Plan Type:</span>{" "}
-                {subscription.type}
-              </p>
-              <p>
-                <span className="font-semibold">Price:</span> ₹
-                {subscription.price}/mo
-              </p>
-              <p>
-                <span className="font-semibold">Start Date:</span>{" "}
-                {new Date(subscription.startDate).toLocaleDateString()}
-              </p>
-              <p>
-                <span className="font-semibold">Expiry Date:</span>{" "}
-                {new Date(subscription.endDate).toLocaleDateString()}
-              </p>
-              <p>
-                <span className="font-semibold">Renewal:</span>{" "}
-                {subscription.autoRenew ? "Auto-renew enabled 🔄" : "Manual"}
+                <span className="font-semibold">Plan Type:</span> {subscription}
               </p>
             </div>
           </div>
