@@ -15,7 +15,7 @@ const Premium = () => {
 
       if (res.data.isPreminum) {
         setIsUserPremium(true);
-        setSubscription(res.data.subscription); // 🎟️ subscription details from backend
+        setSubscription(res.data.membershipType); // 🎟️ subscription details from backend
       }
     } catch (error) {
       console.error("Error verifying premium user", error);
