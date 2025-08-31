@@ -63,14 +63,14 @@ const Premium = () => {
     rzp.open();
   };
 
-  // 🎉 If user is premium → Show premium celebration + subscription details
+  // 🎉 Premium Celebration + Subscription Card
   if (isUserPreminum) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-yellow-300 via-orange-400 to-pink-500 text-white text-center px-6">
-        <div className="animate-bounce mb-6">
-          <span className="text-6xl">✨</span>
-        </div>
+        {/* Sparkles Animation */}
+        <div className="animate-bounce mb-6 text-6xl">✨</div>
 
+        {/* Heading */}
         <h1 className="text-5xl font-extrabold drop-shadow-lg">
           Welcome to{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-200 via-yellow-400 to-orange-500">
@@ -79,6 +79,7 @@ const Premium = () => {
           🎉
         </h1>
 
+        {/* Description */}
         <p className="mt-4 text-lg font-medium max-w-xl">
           You’re now enjoying <span className="font-bold">exclusive perks</span>
           , unlimited connections, boosts, chat features, and priority support.
@@ -87,14 +88,33 @@ const Premium = () => {
 
         {/* Subscription Details Card */}
         {subscription && (
-          <div className="mt-10 card w-full max-w-lg bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl">
-            <div className="card-body text-left">
-              <h2 className="text-2xl font-bold text-yellow-200 mb-4">
+          <div className="mt-10 w-full max-w-lg bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-2xl transform transition-all duration-500 hover:scale-105 hover:shadow-3xl">
+            <div className="p-8 relative overflow-hidden">
+              {/* Animated Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 opacity-20 animate-gradient-x mix-blend-overlay rounded-3xl"></div>
+
+              <h2 className="text-3xl font-extrabold text-yellow-200 mb-6 flex items-center justify-center">
                 📜 Subscription Details
               </h2>
-              <p>
-                <span className="font-semibold">Plan Type:</span> {subscription}
-              </p>
+
+              <div className="text-left space-y-3 text-white">
+                <p className="text-lg">
+                  <span className="font-semibold">Plan Type:</span>{" "}
+                  {subscription}
+                </p>
+                <p className="text-lg">
+                  <span className="font-semibold">Perks:</span> Unlimited
+                  connections, boosts, chat, verified badge, priority support
+                </p>
+              </div>
+
+              {/* Decorative Sparkles */}
+              <div className="absolute top-2 left-2 text-yellow-300 text-2xl animate-pulse">
+                ✨
+              </div>
+              <div className="absolute bottom-2 right-2 text-pink-300 text-2xl animate-pulse">
+                ✨
+              </div>
             </div>
           </div>
         )}
