@@ -13,6 +13,8 @@ const Premium = () => {
         withCredentials: true,
       });
 
+      console.log(res);
+
       if (res.data.isPreminum) {
         setIsUserPremium(true);
         setSubscription(res.data.membershipType); // 🎟️ subscription details from backend
