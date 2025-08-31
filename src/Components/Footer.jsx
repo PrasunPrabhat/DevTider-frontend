@@ -33,7 +33,8 @@ const Footer = () => {
 
         {/* Right Section: Copyright */}
         <p className="text-sm text-gray-400">
-          © {new Date().getFullYear()} DevTinder. All rights reserved.
+          © {new Date().getFullYear()} DevTinder [Developed BY Prasun Prabhat].
+          All rights reserved.
         </p>
       </div>
     </footer>
