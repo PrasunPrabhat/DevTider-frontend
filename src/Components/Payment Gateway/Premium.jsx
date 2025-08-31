@@ -59,7 +59,17 @@ const Premium = () => {
       theme: {
         color: "#F37254",
       },
-      handler: verifyPremiumUser,
+      handler: async function () {
+        try {
+          // ✅ Call your verify API
+          await verifyPremiumUser();
+
+          // ✅ Full page reload to update Redux + UI
+          window.location.reload();
+        } catch (err) {
+          console.error("Error verifying premium after payment:", err);
+        }
+      },
     };
 
     // ! This will Open the Razorpay Dialog Box
@@ -76,7 +86,6 @@ const Premium = () => {
     );
   }
 
-  
   // 🎉 Premium Celebration + Subscription Card
   if (isUserPreminum) {
     return (
