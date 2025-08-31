@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { BASE_URL } from "../utils/Constants";
 import { addConnections, removeConnections } from "../utils/Store/ConnectSlice";
 import ConnectionCard from "./ConnectionCard";
- 
+
 const Connect = () => {
   const dispatch = useDispatch();
   const connections = useSelector((state) => state.connections);
@@ -21,7 +21,7 @@ const Connect = () => {
 
         if (res.data.data && res.data.data.length > 0) {
           dispatch(addConnections(res.data.data));
-        } 
+        }
       } catch (error) {
         console.error(error);
         toast.error("Failed to fetch connections");
@@ -36,10 +36,8 @@ const Connect = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <p className="text-gray-200 animate-pulse text-lg">
-          Loading Connections...
-        </p>
+      <div className="min-h-screen flex items-center justify-center bg-base-200">
+        <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24"></div>
       </div>
     );
   }
