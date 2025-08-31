@@ -120,12 +120,7 @@ const Profile = () => {
               alt="Profile"
               className="h-32 w-32 sm:h-40 sm:w-40 md:h-48 md:w-48 rounded-full border-4 border-indigo-400 object-cover shadow-md transform transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer"
             />
-            {/* Premium badge on avatar */}
-            {user.isPremium && (
-              <span className="absolute bottom-0 right-0 bg-yellow-400 text-black rounded-full p-1 border border-white shadow-md">
-                ⭐
-              </span>
-            )}
+
             <button
               onClick={() => setEditMode(true)}
               className="mt-5 flex items-center gap-2 px-5 py-2 bg-indigo-500 hover:bg-indigo-400 text-white rounded-lg transition text-sm sm:text-base font-semibold shadow-md"
