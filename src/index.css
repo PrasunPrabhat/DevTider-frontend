@@ -19,7 +19,7 @@
  */
 
 .loader {
-  border-top-color: #f59e0b; /* yellow-500 */
+  border-top-color: #166288; /* yellow-500 */
   animation: spin 1s linear infinite;
 }
 
