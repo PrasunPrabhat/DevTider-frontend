@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { BASE_URL } from "../utils/Constants";
 import { addConnections, removeConnections } from "../utils/Store/ConnectSlice";
 import ConnectionCard from "./ConnectionCard";
-
+ 
 const Connect = () => {
   const dispatch = useDispatch();
   const connections = useSelector((state) => state.connections);
