@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SVG } from "./SVG";
 import { BASE_URL } from "../../utils/Constants";
 import axios from "axios";
 
 const Premium = () => {
+  const [isUserPreminum, setIsUserPremium] = useState(false);
+  const [subscription, setSubscription] = useState(null);
+
+  const verifyPremiumUser = async () => {
+    try {
+      const res = await axios.get(BASE_URL + "/premium/verify", {
+        withCredentials: true,
+      });
+
+      if (res.data.isPreminum) {
+        setIsUserPremium(true);
+        setSubscription(res.data.subscription); // 🎟️ subscription details from backend
+      }
+    } catch (error) {
+      console.error("Error verifying premium user", error);
+    }
+  };
+
+  useEffect(() => {
+    verifyPremiumUser();
+  }, []);
   const handleBuyClick = async (type) => {
     const order = await axios.post(
       BASE_URL + "/payment/create",
@@ -32,12 +53,70 @@ const Premium = () => {
       theme: {
         color: "#F37254",
       },
+      handler: verifyPremiumUser,
     };
 
     // ! This will Open the Razorpay Dialog Box
     const rzp = new window.Razorpay(options);
     rzp.open();
   };
+
+  // 🎉 If user is premium → Show premium celebration + subscription details
+  if (isUserPreminum) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-yellow-300 via-orange-400 to-pink-500 text-white text-center px-6">
+        <div className="animate-bounce mb-6">
+          <span className="text-6xl">✨</span>
+        </div>
+
+        <h1 className="text-5xl font-extrabold drop-shadow-lg">
+          Welcome to{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-200 via-yellow-400 to-orange-500">
+            Premium
+          </span>{" "}
+          🎉
+        </h1>
+
+        <p className="mt-4 text-lg font-medium max-w-xl">
+          You’re now enjoying <span className="font-bold">exclusive perks</span>
+          , unlimited connections, boosts, chat features, and priority support.
+          Thanks for being an <span className="underline">Elite Member</span> 💎
+        </p>
+
+        {/* Subscription Details Card */}
+        {subscription && (
+          <div className="mt-10 card w-full max-w-lg bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl">
+            <div className="card-body text-left">
+              <h2 className="text-2xl font-bold text-yellow-200 mb-4">
+                📜 Subscription Details
+              </h2>
+              <p>
+                <span className="font-semibold">Plan Type:</span>{" "}
+                {subscription.type}
+              </p>
+              <p>
+                <span className="font-semibold">Price:</span> ₹
+                {subscription.price}/mo
+              </p>
+              <p>
+                <span className="font-semibold">Start Date:</span>{" "}
+                {new Date(subscription.startDate).toLocaleDateString()}
+              </p>
+              <p>
+                <span className="font-semibold">Expiry Date:</span>{" "}
+                {new Date(subscription.endDate).toLocaleDateString()}
+              </p>
+              <p>
+                <span className="font-semibold">Renewal:</span>{" "}
+                {subscription.autoRenew ? "Auto-renew enabled 🔄" : "Manual"}
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-base-200 flex flex-col items-center justify-center px-6 py-12">
       <h1 className="text-4xl font-extrabold mb-12 text-center">
