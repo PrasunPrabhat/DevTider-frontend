@@ -1,4 +1,4 @@
-const isNgrok = window.location.hostname !== "localhost";
-export const BASE_URL = isNgrok 
-  ? "https://abcd1234.ngrok.io" 
+const isHTTPS = window.location.hostname !== "localhost";
+export const BASE_URL = isHTTPS
+  ? "https://devtinder-backend-dg8j.onrender.com" 
   : "http://localhost:3000";
