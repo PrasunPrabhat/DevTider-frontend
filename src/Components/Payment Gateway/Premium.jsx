@@ -6,6 +6,7 @@ import axios from "axios";
 const Premium = () => {
   const [isUserPreminum, setIsUserPremium] = useState(false);
   const [subscription, setSubscription] = useState(null);
+  const [loading, setLoading] = useState(true); // 🔹 Add loading state
 
   const verifyPremiumUser = async () => {
     try {
@@ -21,12 +22,15 @@ const Premium = () => {
       }
     } catch (error) {
       console.error("Error verifying premium user", error);
+    } finally {
+      setLoading(false); // 🔹 Done loading
     }
   };
 
   useEffect(() => {
     verifyPremiumUser();
   }, []);
+
   const handleBuyClick = async (type) => {
     const order = await axios.post(
       BASE_URL + "/payment/create",
@@ -63,6 +67,16 @@ const Premium = () => {
     rzp.open();
   };
 
+  if (loading) {
+    // 🔹 Show spinner or placeholder while fetching
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-base-200">
+        <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24"></div>
+      </div>
+    );
+  }
+
+  
   // 🎉 Premium Celebration + Subscription Card
   if (isUserPreminum) {
     return (

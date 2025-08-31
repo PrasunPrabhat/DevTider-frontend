@@ -17,3 +17,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
  */
+
+.loader {
+  border-top-color: #f59e0b; /* yellow-500 */
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
