@@ -14,11 +14,21 @@ const NavBar = () => {
   const dropdownRef = useRef(null);
   const dispatch = useDispatch();
   const requests = useSelector((store) => store.requests); // ✅ access requests from Redux
+  const hamburgerRef = useRef(null); // 👈 new ref for hamburger
 
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Close profile dropdown if click outside
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        dropdownRef.current.removeAttribute("open"); // close the <details>
+        dropdownRef.current.removeAttribute("open");
+      }
+
+      // Close hamburger dropdown if click outside
+      if (
+        hamburgerRef.current &&
+        !hamburgerRef.current.contains(event.target)
+      ) {
+        hamburgerRef.current.removeAttribute("open");
       }
     };
 
@@ -198,7 +208,10 @@ const NavBar = () => {
             </details>
 
             {/* Mobile Hamburger Menu */}
-            <details className="dropdown dropdown-end md:hidden">
+            <details
+              ref={hamburgerRef}
+              className="dropdown dropdown-end md:hidden"
+            >
               <summary className="btn btn-ghost btn-circle">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

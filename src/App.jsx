@@ -15,6 +15,7 @@ import AuthProvider from "./providers/AuthProvider";
 import Connect from "./Components/Connect";
 import Requests from "./Components/Requests";
 import Premium from "./Components/Payment Gateway/Premium";
+import Chat from "./Components/Chat_Applications/Chat";
 
 const App = () => {
   return (
@@ -88,6 +89,14 @@ const App = () => {
                   element={
                     <ProtectedRoute>
                       <Premium />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/chat/:targetUserId"
+                  element={
+                    <ProtectedRoute>
+                      <Chat />
                     </ProtectedRoute>
                   }
                 />

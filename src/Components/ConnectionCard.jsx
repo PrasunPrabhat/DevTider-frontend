@@ -1,7 +1,17 @@
 // ConnectionCard.jsx
 import React from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const ConnectionCard = ({ user }) => {
+  const navigate = useNavigate();
+  const loggedUser = useSelector((store) => store.user); // current logged user
+
+  const handleChat = () => {
+    navigate(`/chat/${user._id}`, {
+      state: { sender: loggedUser, receiver: user },
+    });
+  };
   return (
     <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg overflow-hidden flex flex-col hover:scale-[1.02] transition-transform">
       {/* User Image */}
@@ -36,6 +46,13 @@ const ConnectionCard = ({ user }) => {
             <span className="text-gray-400 text-xs italic">No skills</span>
           )}
         </div>
+        {/* 👇 Chat Button */}
+        <button
+          onClick={handleChat}
+          className="mt-4 px-4 py-2 bg-indigo-500 hover:bg-indigo-400 text-white rounded-lg transition text-sm font-semibold shadow-md"
+        >
+          💬 Chat
+        </button>
       </div>
     </div>
   );
