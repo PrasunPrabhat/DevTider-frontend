@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../utils/Constants";
@@ -7,7 +7,7 @@ import { ArrowPathIcon } from "@heroicons/react/24/outline"; // ✅ Spinner icon
 
 const AuthProvider = ({ children }) => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true); // ✅ track auth check
+  // const [loading, setLoading] = useState(true); // ✅ track auth check
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -20,21 +20,21 @@ const AuthProvider = ({ children }) => {
         dispatch(removeUser());
         console.error(err);
       } finally {
-        setLoading(false); // ✅ done checking
+        // setLoading(false); // ✅ done checking
       }
     };
 
     checkAuth();
   }, [dispatch]);
 
-  if (loading) {
-    return (
-      <div className="flex h-screen items-center justify-center bg-gray-900">
-        <ArrowPathIcon className="h-10 w-10 text-white animate-spin" />
-        <p className="ml-3 text-white text-lg">Checking...</p>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="flex h-screen items-center justify-center bg-gray-900">
+  //       <ArrowPathIcon className="h-10 w-10 text-white animate-spin" />
+  //       <p className="ml-3 text-white text-lg">Checking...</p>
+  //     </div>
+  //   );
+  // }
 
   return children;
 };
